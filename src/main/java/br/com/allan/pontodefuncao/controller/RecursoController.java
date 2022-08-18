@@ -1,5 +1,8 @@
 package br.com.allan.pontodefuncao.controller;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +30,19 @@ public class RecursoController {
 	@GetMapping("/cadastra-recurso")
 	public String exibeCadastroRecurso() {		
 		return "/recursos/cadastrar-recurso";		
+	}
+	@GetMapping("/listar-recursos")
+	public ModelAndView listarRecursos() {
+		List<Recurso> recursos = recursoRepository.findAll();
+		ModelAndView mv = new ModelAndView("/recursos/listarRecursos");
+		mv.addObject("recursos", recursos);
+		return mv;
+	}
+	@GetMapping("/remove-recurso/{id}")
+	public String removeRecurso(@PathVariable int id) {
+		recursoRepository.deleteById(id);
+		return "/recursos/listarRecursos";
+		
 	}
 
 }

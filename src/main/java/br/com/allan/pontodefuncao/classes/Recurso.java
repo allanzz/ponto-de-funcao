@@ -18,6 +18,7 @@ public class Recurso {
 	private String funcao;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataInicio;
+	public Recurso() {}
 	public Recurso(String nome, String funcao) {
 		this.nome = nome;
 		this.funcao = funcao;

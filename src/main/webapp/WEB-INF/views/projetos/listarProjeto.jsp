@@ -8,6 +8,10 @@
 <title>Recursos</title>
 </head>
 <body>
-Recurso cadastrado com sucesso!!
+<h1>Listagem de recursos</h1>
+<c:forEach var="recurso" items="${recursos}">
+	<c:out value="${recurso.getNome()}" />
+	<br />
+</c:forEach>
 </body>
 </html>
