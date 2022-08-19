@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -22,6 +23,9 @@ public class Tarefa {
 	@ManyToOne()
 	@JoinColumn(name="projeto_id")
 	private Projeto projeto;
+	@OneToOne(cascade = CascadeType.REFRESH)
+	@JoinColumn(name="recurso_id")
+	private Recurso recursoResponsavel;	
 	public int getId() {
 		return id;
 	}
@@ -45,6 +49,12 @@ public class Tarefa {
 	}
 	public void setProjeto(Projeto projeto) {
 		this.projeto = projeto;
+	}
+	public Recurso getRecursoResponsavel() {
+		return recursoResponsavel;
+	}
+	public void setRecursoResponsavel(Recurso recursoResponsavel) {
+		this.recursoResponsavel = recursoResponsavel;
 	}
 	@Override
 	public String toString() {

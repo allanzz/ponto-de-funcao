@@ -10,7 +10,7 @@
 <body>
 <h1>Listagem de recursos</h1>
 <c:forEach var="recurso" items="${recursos}">
-	<c:out value="${recurso.getNome()}" />
+	<c:out value="ID:${recurso.getId()} Nome: ${recurso.getNome()}" />
 	<br />
 </c:forEach>
 </body>

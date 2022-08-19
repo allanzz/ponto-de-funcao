@@ -14,18 +14,20 @@ public class ProjetoController {
 	@Autowired
 	ProjetoRepository projetoRep;
 	@GetMapping("/cadastra-projeto")
-	public String exibeCadastroRecurso() {		
+	public String exibeCadastroProjeto() {		
 		return "/projetos/cadastrar-projeto";		
 	}
 	@PostMapping("/adiciona-projeto")
-	public ModelAndView salvar(Projeto projeto) {
+	public ModelAndView salvarProjeto(Projeto projeto) {
 		System.out.println("Projeto:"+projeto);
 		Projeto projetoSalvo = projetoRep.save(projeto);
 		ModelAndView mv = new ModelAndView("redirect:/cadastra-projeto");
 		mv.addObject("descricao", projetoSalvo.getDescricao());
-		return mv;
-		
-		
+		return mv;		
+	}
+	@GetMapping("/detalhe-projeto/{id}")
+	public String exibeDetalhesProjeto() {		
+		return "/projetos/cadastrar-projeto";		
 	}
 
 }

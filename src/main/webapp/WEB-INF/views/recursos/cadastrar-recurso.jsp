@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Cadastro de recursos</title>
 </head>
 <body>
 <h1>Cadastro de recurso</h1>
