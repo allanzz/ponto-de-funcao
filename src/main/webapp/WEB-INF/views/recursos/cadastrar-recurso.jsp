@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -14,7 +14,7 @@
 </c:if>
 <form action="/adiciona-recurso" method="post">
 <input type="text" name="nome" width=30 placeholder="Digite o nome do recurso">
-<input type="text" name="funcao" width=30 placeholder="Digite a função">
+<input type="text" name="funcao" width=30 placeholder="Digite a funÃ§Ã£o">
 <input type="date" name="dataInicio" width=30 placeholder="Digite a data de inicio">
 <input type="submit" value="Enviar" id="button-1"/>
 </form>

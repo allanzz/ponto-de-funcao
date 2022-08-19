@@ -25,9 +25,11 @@
 </select>
 <input type="submit" value="Enviar" id="button-1"/> 
 </form>
+<c:set var="total" value="0" />
 <c:forEach var="tarefa" items="${projeto.getTarefas()}">
 	<c:out value="Descrição da Tarefa: ${tarefa.getDescricao()} Categoria:${tarefa.getCategoria().getDescricao()} Responsável: ${tarefa.getRecursoResponsavel()}"/><br />
+	<c:set var="total" value="${total+tarefa.getCategoria().getPontoDeFuncao()}" />
 </c:forEach>
-
+<c:out value="${total}" />
 </body>
 </html>

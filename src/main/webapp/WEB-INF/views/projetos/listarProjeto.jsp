@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
@@ -12,7 +12,7 @@
 <h1>Listagem de projetos</h1>
 <c:forEach var="projeto" items="${projetos}">
 	<fmt:formatDate value="${projeto.getDataInicio()}" type="both" pattern="dd/MM/yyyy" var="dataFormatada"/>
-	<c:out value="ID: ${projeto.getId()} Nome: ${projeto.getDescricao()} Responsável:${projeto.getResponsavel()} Data de Inicio:${dataFormatada} " />
+	<c:out value="ID: ${projeto.getId()} Nome: ${projeto.getDescricao()} ResponsÃ¡vel:${projeto.getResponsavel()} Data de Inicio:${dataFormatada} " />
 	<br />
 </c:forEach>
 </body>
