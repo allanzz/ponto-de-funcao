@@ -2,12 +2,12 @@ package br.com.allan.pontodefuncao.classes;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -17,13 +17,15 @@ public class Tarefa {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String descricao;
-	@OneToOne(cascade = CascadeType.REFRESH)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="categoria_id")
 	private CategoriaTarefa categoria;
-	@ManyToOne()
-	@JoinColumn(name="projeto_id")
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "projeto_id")
 	private Projeto projeto;
-	@OneToOne(cascade = CascadeType.REFRESH)
+	
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="recurso_id")
 	private Recurso recursoResponsavel;	
 	public int getId() {

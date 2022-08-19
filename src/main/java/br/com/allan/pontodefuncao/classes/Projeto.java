@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,8 +22,10 @@ public class Projeto {
 	private String responsavel;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataInicio;
-	@OneToMany(mappedBy = "id")
+	
+	@OneToMany(mappedBy = "projeto" ,cascade=CascadeType.ALL)
    	private List<Tarefa> tarefas;
+	
 	public Projeto() {
 		tarefas=new ArrayList<>();
 	}
@@ -55,6 +58,9 @@ public class Projeto {
 	}
 	public void setTarefas(List<Tarefa> tarefas) {
 		this.tarefas = tarefas;
+	}
+	public void adicionarTarefa(Tarefa tarefa) {
+		this.tarefas.add(tarefa);
 	}
 	@Override
 	public String toString() {

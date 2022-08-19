@@ -1,27 +1,33 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Cadastro de projeto</title>
 </head>
 <body>
-<h1>Cadastro de Projeto</h1>
-<form action="/adiciona-projeto" method="post">
-<input type="text" name="descricao" value="${projeto.getDescricao()}" width=30 placeholder="Nome do Projeto" readonly="readonly">
-<input type="text" name="responsavel" value="${projeto.getResponsavel()} width=30 placeholder="Responsavel pelo projeto" readonly="readonly">
-<input type="date" name="dataInicio" value="${projeto.getDataInicio()} width=30 placeholder="Digite a data de inicio" readonly="readonly">
-</form>
+<h1>Detalhes de Projeto</h1>
+<fmt:formatDate value="${projeto.getDataInicio()}" type="both" pattern="dd/MM/yyyy" var="dataFormatada"/>
+<c:out value="Nome do projeto: ${projeto.getDescricao()} | Responsável:${projeto.getResponsavel()} | Data de Inicio:${dataFormatada}" />
 
-<c:if test="${param.projetoId!=null}">
-<form action="/adiciona-tarefa" method="post">
+<h2>Adicionar tarefas</h2>
+<form action=<c:out value="/adiciona-tarefa/${projeto.getId()}" /> method="post">
 <input type="text" name="descricao" width=30 placeholder="Nome do Projeto">
 <input type="text" name="responsavel" width=30 placeholder="Responsavel pelo projeto">
-<input type="date" name="dataInicio" width=30 placeholder="Digite a data de inicio">
-<input type="submit" value="Enviar" id="button-1"/>
+<input type="hidden" name="projeto_id" value="${projeto.getId()}" />
+<select name="categoria">
+	<c:forEach var="categoria" items="${categorias}">
+		<option value="${categoria.getId()}"><c:out value="${categoria.getDescricao()}" /></option>
+	</c:forEach>
+</select>
+<input type="submit" value="Enviar" id="button-1"/> 
 </form>
-</c:if>
+<c:forEach var="tarefa" items="${projeto.getTarefas()}">
+	<c:out value="Descrição da Tarefa: ${tarefa.getDescricao()} Categoria:${tarefa.getCategoria().getDescricao()} Responsável: ${tarefa.getRecursoResponsavel()}"/><br />
+</c:forEach>
+
 </body>
 </html>
