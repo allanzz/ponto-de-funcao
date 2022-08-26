@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,13 +10,14 @@
 	rel="stylesheet"
 	integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
 	crossorigin="anonymous">
-<title>Recursos</title>
+<title>Login</title>
 </head>
 <body>
-<h1>Listagem de recursos</h1>
-<c:forEach var="recurso" items="${recursos}">
-	<c:out value="ID:${recurso.getId()} Nome: ${recurso.getNome()}" />
-	<br />
-</c:forEach>
+<form action="/login" method="post">
+	<input type="text" name="username" placeholder="Nome do usuário" />
+	<input type="password" name="password" placeholder="Digite a senha" />
+	<button type="submit" value="Enviar">Enviar</button>
+</form>
+
 </body>
 </html>

@@ -23,11 +23,11 @@ public class Tarefa {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "projeto_id")
-	private Projeto projeto;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="recurso_id")
-	private Recurso recursoResponsavel;	
+	private Projeto projeto;	
+	public String getRecursoResponsavel() {
+		return recursoResponsavel;
+	}
+	private String recursoResponsavel;	
 	public int getId() {
 		return id;
 	}
@@ -36,6 +36,9 @@ public class Tarefa {
 	}
 	public String getDescricao() {
 		return descricao;
+	}
+	public void setRecursoResponsavel(String recursoResponsavel) {
+		this.recursoResponsavel = recursoResponsavel;
 	}
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
@@ -51,12 +54,6 @@ public class Tarefa {
 	}
 	public void setProjeto(Projeto projeto) {
 		this.projeto = projeto;
-	}
-	public Recurso getRecursoResponsavel() {
-		return recursoResponsavel;
-	}
-	public void setRecursoResponsavel(Recurso recursoResponsavel) {
-		this.recursoResponsavel = recursoResponsavel;
 	}
 	@Override
 	public String toString() {
