@@ -21,20 +21,26 @@
 	<c:out
 		value="Nome do projeto: ${projeto.getDescricao()} | Responsável:${projeto.getResponsavel()} | Data de Inicio:${dataFormatada}" />
 
-	<h2>Adicionar tarefas</h2>
+	<h2>Novo Ponto De Função</h2>
 	<div class="form-group">
-	<form action=<c:out value="/adiciona-tarefa/${projeto.getId()}" />
+	<form action=<c:out value="/nova-funcao/${projeto.getId()}" />
 		method="post">
 		<input type="text" name="descricao" width=30
-			placeholder="Nome do Projeto"> <input type="text"
-			name="recursoResponsavel" width=30 placeholder="Responsavel pelo projeto">
-		<input type="hidden" name="projeto_id" value="${projeto.getId()}" />
-		<select name="categoria">
-			<c:forEach var="categoria" items="${categorias}">
-				<option value="${categoria.getId()}"><c:out
-						value="${categoria.getDescricao()}" /></option>
-			</c:forEach>
-		</select> <input type="submit" value="Enviar" id="button-1" />
+			placeholder="Descrição"> <input type="text"
+			name="Responsavel" width=30 placeholder="Responsavel pela tarefa">			
+			<input type="text"
+			name="rlr_alr" width=3 placeholder="Quantidade de RLR/ALR">
+			<input type="text"
+			name="der" width=3 placeholder="Quantidade de DER">
+		<input type="hidden" name="projeto_id" value="${projeto.getId()}" />		
+		<select name=tipoDeFuncao>
+			<option value="ArquivoInterfaceExterna">AIE</option>
+			<option value="ArquivoLogicoInterno">ALI</option>
+			<option value="EntradaExterna">EE</option>
+			<option value="SaidaExterna">SE</option>
+			<option value="ConsultaExterna">CE</option>
+		</select>
+		<input type="submit" value="Enviar" id="button-1" />
 	</form>
 	</div>
 	<c:set var="total" value="0" />
@@ -48,12 +54,16 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="tarefa" items="${projeto.getTarefas()}">
+			<c:forEach var="funcao" items="${projeto.getFuncoes()}">
 				<tr>
-					<td>${tarefa.getDescricao()}</td>
-					<td>${tarefa.getCategoria().getDescricao()}</td>
-					<td>${tarefa.getRecursoResponsavel()}</td>
-					<td>${tarefa.getCategoria().getPontoDeFuncao()}</td>
+					<td>${funcao.getDescricao()}</td>
+					<td>${funcao.getResponsavel()}</td>
+					<td>${funcao.getTipo()}</td>
+					<td>${funcao.getRlr()}</td>
+					<td>${funcao.getDer()}</td>
+					<td>${funcao.calcularComplexidade()}</td>
+					<td>${funcao.PontosDeFuncao()}</td>
+					<td>${funcao.calculaPontoDeFuncao()}</td>
 					<c:set var="total"
 						value="${total+tarefa.getCategoria().getPontoDeFuncao()}" />
 				</tr>
