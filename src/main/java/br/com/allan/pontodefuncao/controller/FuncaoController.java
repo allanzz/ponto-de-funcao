@@ -33,11 +33,11 @@ public class FuncaoController {
 			novaFuncao.setId(funcao.getId());
 			novaFuncao.setResponsavel(funcao.getResponsavel());
 			novaFuncao.setRlr_alr(funcao.getRlr_alr());
-			novaFuncao.CalcularComplexidade();
+			novaFuncao.calcularComplexidade();
 			novaFuncao.calcularPontosDeFuncao();
 			projeto.get().adicionarFuncao(novaFuncao);
 			novaFuncao.setProjeto(projeto.get());
-			System.out.println(novaFuncao.CalcularComplexidade());
+			System.out.println(novaFuncao.calcularComplexidade());
 			System.out.println(novaFuncao.calcularPontosDeFuncao());
 			projetoRep.save(projeto.get());
 			String url = "/detalhe-projeto/"+projeto.get().getId();

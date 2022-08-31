@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"br.com.allan.pontodefuncao.classes.TiposFuncoes","l":"EntradaExterna"}];updateSearchResults();

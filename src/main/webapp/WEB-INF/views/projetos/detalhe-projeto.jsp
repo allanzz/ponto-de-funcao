@@ -50,6 +50,8 @@
 				<th scope="col">Descrição</th>
 				<th scope="col">Categoria</th>
 				<th scope="col">Responsável</th>
+				<th scope="col">RLR/ALR</th>
+				<th scope="col">DER</th>
 				<th scope="col">Pontos</th>
 			</tr>
 		</thead>
@@ -62,10 +64,9 @@
 					<td>${funcao.getRlr()}</td>
 					<td>${funcao.getDer()}</td>
 					<td>${funcao.calcularComplexidade()}</td>
-					<td>${funcao.PontosDeFuncao()}</td>
-					<td>${funcao.calculaPontoDeFuncao()}</td>
+					<td>${funcao.calcularPontosDeFuncao()}</td>
 					<c:set var="total"
-						value="${total+tarefa.getCategoria().getPontoDeFuncao()}" />
+						value="${total+funcao.calcularPontosDeFuncao()}" />
 				</tr>
 			</c:forEach>
 		</tbody>

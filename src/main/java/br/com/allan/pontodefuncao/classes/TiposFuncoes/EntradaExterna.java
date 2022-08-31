@@ -13,24 +13,25 @@ public class EntradaExterna extends Funcao{
 		this.projeto =  projeto;	
 	}
 	public EntradaExterna() {}
-	TipoComplexidade tipo=null;
+	
 	@Override
-	public TipoComplexidade CalcularComplexidade() {		
-		tipo = verificaFaixaRLR()==1&&verificarFaixaDer()==1?TipoComplexidade.SIMPLES:tipo;
-		tipo = verificaFaixaRLR()==1&&verificarFaixaDer()==2?TipoComplexidade.SIMPLES:tipo;
-		tipo = verificaFaixaRLR()==1&&verificarFaixaDer()==3?TipoComplexidade.MEDIA:tipo;
-		tipo = verificaFaixaRLR()==2&&verificarFaixaDer()==1?TipoComplexidade.SIMPLES:tipo;
-		tipo = verificaFaixaRLR()==2&&verificarFaixaDer()==2?TipoComplexidade.MEDIA:tipo;
-		tipo = verificaFaixaRLR()==2&&verificarFaixaDer()==3?TipoComplexidade.COMPLEXA:tipo;
-		tipo = verificaFaixaRLR()==3&&verificarFaixaDer()==1?TipoComplexidade.MEDIA:tipo;
-		tipo = verificaFaixaRLR()==3&&verificarFaixaDer()==2?TipoComplexidade.COMPLEXA:tipo;
-		tipo = verificaFaixaRLR()==3&&verificarFaixaDer()==3?TipoComplexidade.COMPLEXA:tipo;
-		return tipo;		
+	public TipoComplexidade calcularComplexidade() {	
+		TipoComplexidade tipoComplexidade=null;
+		tipoComplexidade = verificaFaixaRLR()==1&&verificarFaixaDer()==1?TipoComplexidade.SIMPLES:tipoComplexidade;
+		tipoComplexidade = verificaFaixaRLR()==1&&verificarFaixaDer()==2?TipoComplexidade.SIMPLES:tipoComplexidade;
+		tipoComplexidade = verificaFaixaRLR()==1&&verificarFaixaDer()==3?TipoComplexidade.MEDIA:tipoComplexidade;
+		tipoComplexidade = verificaFaixaRLR()==2&&verificarFaixaDer()==1?TipoComplexidade.SIMPLES:tipoComplexidade;
+		tipoComplexidade = verificaFaixaRLR()==2&&verificarFaixaDer()==2?TipoComplexidade.MEDIA:tipoComplexidade;
+		tipoComplexidade = verificaFaixaRLR()==2&&verificarFaixaDer()==3?TipoComplexidade.COMPLEXA:tipoComplexidade;
+		tipoComplexidade = verificaFaixaRLR()==3&&verificarFaixaDer()==1?TipoComplexidade.MEDIA:tipoComplexidade;
+		tipoComplexidade = verificaFaixaRLR()==3&&verificarFaixaDer()==2?TipoComplexidade.COMPLEXA:tipoComplexidade;
+		tipoComplexidade = verificaFaixaRLR()==3&&verificarFaixaDer()==3?TipoComplexidade.COMPLEXA:tipoComplexidade;
+		return tipoComplexidade;		
 	}
-	public double calculaPontosDeFuncao() {
-		this.pontosDeFuncao=tipo==TipoComplexidade.SIMPLES?3:this.pontosDeFuncao;
-		this.pontosDeFuncao=tipo==TipoComplexidade.MEDIA?4:this.pontosDeFuncao;
-		this.pontosDeFuncao=tipo==TipoComplexidade.COMPLEXA?6:this.pontosDeFuncao;
+	public double calcularPontosDeFuncao() {
+		this.pontosDeFuncao=calcularComplexidade()==TipoComplexidade.SIMPLES?3:this.pontosDeFuncao;
+		this.pontosDeFuncao=calcularComplexidade()==TipoComplexidade.MEDIA?4:this.pontosDeFuncao;
+		this.pontosDeFuncao=calcularComplexidade()==TipoComplexidade.COMPLEXA?6:this.pontosDeFuncao;
 		return this.pontosDeFuncao;
 		
 	}

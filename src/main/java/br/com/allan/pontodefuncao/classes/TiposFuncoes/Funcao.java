@@ -95,7 +95,7 @@ public class Funcao {
 	public void setTipoDeFuncao(String tipoDeFuncao) {
 		this.tipoDeFuncao = tipoDeFuncao;
 	}
-	public TipoComplexidade CalcularComplexidade() {
+	public TipoComplexidade calcularComplexidade() {
 		return null;
 	}
 	public double calcularPontosDeFuncao() {
