@@ -52,6 +52,7 @@
 				<th scope="col">Responsável</th>
 				<th scope="col">RLR/ALR</th>
 				<th scope="col">DER</th>
+				<th scope="col">Complexidade</th>
 				<th scope="col">Pontos</th>
 			</tr>
 		</thead>

@@ -2,9 +2,14 @@ package br.com.allan.pontodefuncao.classes.TiposFuncoes;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-
 import br.com.allan.pontodefuncao.classes.Projeto;
 import br.com.allan.pontodefuncao.classes.TipoComplexidade;
+
+
+/**
+ * Classe para calcular a complexidade e calcular o total de pontos de função de um Arquivo de Interface Externa
+ * @author Allan da Silva
+ */
 
 @Entity
 @DiscriminatorValue(value = "AIE")
@@ -15,8 +20,11 @@ public class ArquivoInterfaceExterna extends Funcao {
 		this.projeto = projeto;
 	}
 	public ArquivoInterfaceExterna() {}
+	
+	
 	@Override
 	public TipoComplexidade calcularComplexidade() {
+		if(this.tipoDeContagem.equals("Detalhada")) {
 		TipoComplexidade tipoComplexidade=null;	
 		tipoComplexidade = verificaFaixaRLR()==1&&verificarFaixaDer()==1?TipoComplexidade.SIMPLES:tipoComplexidade;
 		tipoComplexidade = verificaFaixaRLR()==1&&verificarFaixaDer()==2?TipoComplexidade.SIMPLES:tipoComplexidade;
@@ -28,6 +36,9 @@ public class ArquivoInterfaceExterna extends Funcao {
 		tipoComplexidade = verificaFaixaRLR()==3&&verificarFaixaDer()==2?TipoComplexidade.COMPLEXA:tipoComplexidade;
 		tipoComplexidade = verificaFaixaRLR()==3&&verificarFaixaDer()==3?TipoComplexidade.COMPLEXA:tipoComplexidade;
 		return tipoComplexidade;
+		}else {
+			return TipoComplexidade.SIMPLES;
+		}
 		
 	}
 	public double calcularPontosDeFuncao() {
@@ -36,6 +47,8 @@ public class ArquivoInterfaceExterna extends Funcao {
 		this.pontosDeFuncao=calcularComplexidade()==TipoComplexidade.COMPLEXA?10:this.pontosDeFuncao;
 		return this.pontosDeFuncao;
 	}	
+	
+   
 	public int verificaFaixaRLR() {
 		if(this.getRlr()>=2&&this.getRlr()<=5) {
 			return 2;

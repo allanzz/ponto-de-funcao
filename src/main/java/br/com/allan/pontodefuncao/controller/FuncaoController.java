@@ -20,33 +20,43 @@ public class FuncaoController {
 	FuncaoRepository funcaoRep;
 	@Autowired
 	ProjetoRepository projetoRep;
+
 	@PostMapping("/nova-funcao/{id}")
-	public ModelAndView adicionaFuncao(@PathVariable int id,Funcao funcao) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
+	public ModelAndView adicionaFuncao(@PathVariable int id, Funcao funcao)
+			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException,
+			NoSuchMethodException, SecurityException, ClassNotFoundException {
 		System.out.println("Entrou nessa função");
-		Class<?> classeFuncao = getClass().forName("br.com.allan.pontodefuncao.classes.TiposFuncoes."+funcao.getTipoDeFuncao());		
+		Class<?> classeFuncao = getClass()
+				.forName("br.com.allan.pontodefuncao.classes.TiposFuncoes." + funcao.getTipoDeFuncao());
 		Optional<Projeto> projeto = projetoRep.findById(id);
-		
-		if(projeto.isPresent()) {	
-			Funcao novaFuncao = (Funcao) classeFuncao.getDeclaredConstructor().newInstance();	
-			novaFuncao.setDer(funcao.getDer());
-			novaFuncao.setDescricao(funcao.getDescricao());
-			novaFuncao.setId(funcao.getId());
-			novaFuncao.setResponsavel(funcao.getResponsavel());
-			novaFuncao.setRlr_alr(funcao.getRlr_alr());
-			novaFuncao.calcularComplexidade();
-			novaFuncao.calcularPontosDeFuncao();
-			projeto.get().adicionarFuncao(novaFuncao);
-			novaFuncao.setProjeto(projeto.get());
-			System.out.println(novaFuncao.calcularComplexidade());
-			System.out.println(novaFuncao.calcularPontosDeFuncao());
+
+		if (projeto.isPresent()) {
+			Funcao novaFuncao = criaNovaFuncao(funcao, classeFuncao, projeto);
+
 			projetoRep.save(projeto.get());
-			String url = "/detalhe-projeto/"+projeto.get().getId();
-			ModelAndView mv = new ModelAndView("redirect:"+url);
+			String url = "/detalhe-projeto/" + projeto.get().getId();
+			ModelAndView mv = new ModelAndView("redirect:" + url);
 			mv.addObject("descricao", projeto.get().getDescricao());
-			return mv;		
-		}else {
+			return mv;
+		} else {
 			return null;
 		}
+	}
+
+	public Funcao criaNovaFuncao(Funcao funcao, Class<?> classeFuncao, Optional<Projeto> projeto)
+			throws InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+		Funcao novaFuncao = (Funcao) classeFuncao.getDeclaredConstructor().newInstance();
+		novaFuncao.setDer(funcao.getDer());
+		novaFuncao.setDescricao(funcao.getDescricao());
+		novaFuncao.setId(funcao.getId());
+		novaFuncao.setResponsavel(funcao.getResponsavel());
+		novaFuncao.setRlr_alr(funcao.getRlr_alr());
+		novaFuncao.setTipoDeContagem(projeto.get().getTipoContagem());
+		novaFuncao.calcularComplexidade();
+		novaFuncao.calcularPontosDeFuncao();
+		projeto.get().adicionarFuncao(novaFuncao);
+		novaFuncao.setProjeto(projeto.get());
+		return novaFuncao;
 	}
 
 }

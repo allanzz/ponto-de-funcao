@@ -2,9 +2,14 @@ package br.com.allan.pontodefuncao.classes.TiposFuncoes;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-
 import br.com.allan.pontodefuncao.classes.Projeto;
 import br.com.allan.pontodefuncao.classes.TipoComplexidade;
+
+
+/**
+ * Classe para calcular a complexidade e calcular o total de pontos de função de um Arquivo Lógico Interno
+ * @author Allan da Silva
+ */
 @Entity
 @DiscriminatorValue(value = "ALI")
 public class ArquivoLogicoInterno extends Funcao {
@@ -17,6 +22,7 @@ public class ArquivoLogicoInterno extends Funcao {
 	
 	@Override
 	public TipoComplexidade calcularComplexidade() {	
+		if(this.tipoDeContagem.equals("Detalhada")) {
 		TipoComplexidade tipocomplexidade=null;
 		tipocomplexidade = verificaFaixaRLR()==1&&verificarFaixaDer()==1?TipoComplexidade.SIMPLES:tipocomplexidade;
 		tipocomplexidade = verificaFaixaRLR()==1&&verificarFaixaDer()==2?TipoComplexidade.SIMPLES:tipocomplexidade;
@@ -28,6 +34,9 @@ public class ArquivoLogicoInterno extends Funcao {
 		tipocomplexidade = verificaFaixaRLR()==3&&verificarFaixaDer()==2?TipoComplexidade.COMPLEXA:tipocomplexidade;
 		tipocomplexidade = verificaFaixaRLR()==3&&verificarFaixaDer()==3?TipoComplexidade.COMPLEXA:tipocomplexidade;
 		return tipocomplexidade;
+		}else {
+			return TipoComplexidade.SIMPLES;
+		}
 		
 	}
 	public double calcularPontosDeFuncao() {

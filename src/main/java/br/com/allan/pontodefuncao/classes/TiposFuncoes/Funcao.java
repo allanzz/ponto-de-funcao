@@ -29,7 +29,17 @@ public class Funcao {
 	String responsavel;
 	private int rlr_alr;
 	private int der;
-	String tipoDeFuncao;
+	private String tipoDeFuncao;
+	protected String tipoDeContagem;
+	public String getTipoDeContagem() {
+		return tipoDeContagem;
+	}
+	public void setTipoDeContagem(String tipoDeContagem) {
+		this.tipoDeContagem = tipoDeContagem;
+	}
+	public double getPontosDeFuncao() {
+		return pontosDeFuncao;
+	}
 	@Column(insertable=false, updatable=false)
     private String tipo;
 	protected double pontosDeFuncao;
@@ -101,5 +111,5 @@ public class Funcao {
 	public double calcularPontosDeFuncao() {
 		return 0.00;
 	}
-	
+
 }

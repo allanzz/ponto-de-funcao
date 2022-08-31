@@ -89,17 +89,12 @@ public class Projeto {
 	}
 	public void setDataInicio(Date dataInicio) {
 		this.dataInicio = dataInicio;
-	}
-	public List<Funcao> getTarefas() {
-		return funcoes;
-	}
-	public void setTarefas(List<Funcao> funcoes) {
-		this.funcoes = funcoes;
 	}	
 	@Override
 	public String toString() {
 		return "Projeto [id=" + id + ", descricao=" + descricao + ", responsavel=" + responsavel + ", dataInicio="
-				+ dataInicio + ", funcoes=" +funcoes + "]";
+				+ dataInicio + ", tipoProjeto=" + tipoProjeto + ", tipoContagem=" + tipoContagem + ", artefato="
+				+ artefato + ", comentarios=" + comentarios + ", funcoes=" + funcoes + "]";
 	}
 	public void adicionarFuncao(Funcao funcao) {
 		this.funcoes.add(funcao);		

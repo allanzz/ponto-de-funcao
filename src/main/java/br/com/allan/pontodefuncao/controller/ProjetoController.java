@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.allan.pontodefuncao.classes.Projeto;
-import br.com.allan.pontodefuncao.util.repository.CategoriaTarefaRepository;
 import br.com.allan.pontodefuncao.util.repository.FuncaoRepository;
 import br.com.allan.pontodefuncao.util.repository.ProjetoRepository;
 
@@ -20,8 +19,7 @@ import br.com.allan.pontodefuncao.util.repository.ProjetoRepository;
 public class ProjetoController {
 	@Autowired
 	ProjetoRepository projetoRep;
-	@Autowired
-	CategoriaTarefaRepository categoriaRepository;
+	
 	@Autowired
 	FuncaoRepository funcaoRepository;
 	@GetMapping("/cadastra-projeto")
@@ -42,7 +40,6 @@ public class ProjetoController {
 		if(projeto.isPresent()) {
 		ModelAndView mv = new ModelAndView("/projetos/detalhe-projeto");
 		mv.addObject("projeto",projeto.get());
-		System.out.println(projeto.get().getTarefas().toString());
 		return mv;
 		}else {
 			return new ModelAndView("/listar-projeto");

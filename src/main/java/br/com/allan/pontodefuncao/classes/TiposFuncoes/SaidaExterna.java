@@ -6,6 +6,11 @@ import javax.persistence.Entity;
 import br.com.allan.pontodefuncao.classes.Projeto;
 import br.com.allan.pontodefuncao.classes.TipoComplexidade;
 
+/**
+ * Classe para calcular a complexidade e calcular o total de pontos de função de uma Saida Externa
+ * @author Allan da Silva
+ */
+
 @Entity
 @DiscriminatorValue(value = "SE")
 public class SaidaExterna extends Funcao {
@@ -16,7 +21,8 @@ public class SaidaExterna extends Funcao {
 	}
 	public SaidaExterna() {}
 	@Override
-	public TipoComplexidade calcularComplexidade() {	
+	public TipoComplexidade calcularComplexidade() {
+		if(this.tipoDeContagem.equals("Detalhada")) {
 		TipoComplexidade tipoComplexidade=null;
 		tipoComplexidade = verificaFaixaRLR()==1&&verificarFaixaDer()==1?TipoComplexidade.SIMPLES:tipoComplexidade;
 		tipoComplexidade = verificaFaixaRLR()==1&&verificarFaixaDer()==2?TipoComplexidade.SIMPLES:tipoComplexidade;
@@ -27,7 +33,10 @@ public class SaidaExterna extends Funcao {
 		tipoComplexidade = verificaFaixaRLR()==3&&verificarFaixaDer()==1?TipoComplexidade.MEDIA:tipoComplexidade;
 		tipoComplexidade = verificaFaixaRLR()==3&&verificarFaixaDer()==2?TipoComplexidade.COMPLEXA:tipoComplexidade;
 		tipoComplexidade = verificaFaixaRLR()==3&&verificarFaixaDer()==3?TipoComplexidade.COMPLEXA:tipoComplexidade;
-		return tipoComplexidade;		
+		return tipoComplexidade;	
+		}else {
+			return TipoComplexidade.MEDIA;
+		}
 	}
 	public double calcularPontosDeFuncao() {
 		this.pontosDeFuncao=calcularComplexidade()==TipoComplexidade.SIMPLES?4:this.pontosDeFuncao;
