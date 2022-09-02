@@ -41,6 +41,7 @@ public class EntradaExterna extends Funcao{
 		this.pontosDeFuncao=calcularComplexidade()==TipoComplexidade.SIMPLES?3:this.pontosDeFuncao;
 		this.pontosDeFuncao=calcularComplexidade()==TipoComplexidade.MEDIA?4:this.pontosDeFuncao;
 		this.pontosDeFuncao=calcularComplexidade()==TipoComplexidade.COMPLEXA?6:this.pontosDeFuncao;
+		calcularPontosDeFuncaoImpactado();
 		return this.pontosDeFuncao;
 		
 	}

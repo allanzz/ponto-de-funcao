@@ -25,8 +25,8 @@ public class Projeto {
 	private String responsavel;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataInicio;
-	String tipoProjeto;
-	String tipoContagem;
+	private String tipoProjeto;
+	private String tipoContagem;
 	private String artefato;
 	private String comentarios;
 	

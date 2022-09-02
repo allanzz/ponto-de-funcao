@@ -44,6 +44,7 @@ public class ArquivoLogicoInterno extends Funcao {
 		this.pontosDeFuncao=calcularComplexidade()==TipoComplexidade.SIMPLES?7:this.pontosDeFuncao;
 		this.pontosDeFuncao=calcularComplexidade()==TipoComplexidade.MEDIA?10:this.pontosDeFuncao;
 		this.pontosDeFuncao=calcularComplexidade()==TipoComplexidade.COMPLEXA?15:this.pontosDeFuncao;
+		calcularPontosDeFuncaoImpactado();
 		return this.pontosDeFuncao;
 	}
 	

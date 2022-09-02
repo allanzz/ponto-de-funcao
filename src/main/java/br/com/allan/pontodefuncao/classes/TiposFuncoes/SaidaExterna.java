@@ -42,6 +42,7 @@ public class SaidaExterna extends Funcao {
 		this.pontosDeFuncao=calcularComplexidade()==TipoComplexidade.SIMPLES?4:this.pontosDeFuncao;
 		this.pontosDeFuncao=calcularComplexidade()==TipoComplexidade.MEDIA?5:this.pontosDeFuncao;
 		this.pontosDeFuncao=calcularComplexidade()==TipoComplexidade.COMPLEXA?7:this.pontosDeFuncao;
+		calcularPontosDeFuncaoImpactado();
 		return this.pontosDeFuncao;
 		
 	}

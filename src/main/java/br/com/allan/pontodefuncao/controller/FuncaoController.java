@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.allan.pontodefuncao.classes.Deflator;
 import br.com.allan.pontodefuncao.classes.Projeto;
 import br.com.allan.pontodefuncao.classes.TiposFuncoes.Funcao;
+import br.com.allan.pontodefuncao.util.repository.DeflatorRepository;
 import br.com.allan.pontodefuncao.util.repository.FuncaoRepository;
 import br.com.allan.pontodefuncao.util.repository.ProjetoRepository;
 
@@ -20,19 +22,22 @@ public class FuncaoController {
 	FuncaoRepository funcaoRep;
 	@Autowired
 	ProjetoRepository projetoRep;
+	@Autowired
+	DeflatorRepository deflatorRep;
 
 	@PostMapping("/nova-funcao/{id}")
 	public ModelAndView adicionaFuncao(@PathVariable int id, Funcao funcao)
 			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException,
 			NoSuchMethodException, SecurityException, ClassNotFoundException {
-		System.out.println("Entrou nessa função");
-		Class<?> classeFuncao = getClass()
-				.forName("br.com.allan.pontodefuncao.classes.TiposFuncoes." + funcao.getTipoDeFuncao());
+		System.out.println("Entrou na função de nova-função");
+		Class<?> classeFuncao = Class.forName("br.com.allan.pontodefuncao.classes.TiposFuncoes." + funcao.getTipoDeFuncao());
 		Optional<Projeto> projeto = projetoRep.findById(id);
+		Optional<Deflator> deflatorOpt = deflatorRep.findById(funcao.getIdDeflator());
+		Deflator deflator = deflatorOpt.isPresent()?deflatorOpt.get():null;
+		System.out.println(funcao.getDeflator());
 
 		if (projeto.isPresent()) {
-			Funcao novaFuncao = criaNovaFuncao(funcao, classeFuncao, projeto);
-
+			criaNovaFuncao(funcao,deflator,classeFuncao, projeto);
 			projetoRep.save(projeto.get());
 			String url = "/detalhe-projeto/" + projeto.get().getId();
 			ModelAndView mv = new ModelAndView("redirect:" + url);
@@ -43,7 +48,8 @@ public class FuncaoController {
 		}
 	}
 
-	public Funcao criaNovaFuncao(Funcao funcao, Class<?> classeFuncao, Optional<Projeto> projeto)
+	//Funçao que passa os parametros de uma função recebida da tela de inclusão para um objeto Ponto de funcção específico
+	public Funcao criaNovaFuncao(Funcao funcao,Deflator deflator, Class<?> classeFuncao, Optional<Projeto> projeto)
 			throws InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 		Funcao novaFuncao = (Funcao) classeFuncao.getDeclaredConstructor().newInstance();
 		novaFuncao.setDer(funcao.getDer());
@@ -52,6 +58,7 @@ public class FuncaoController {
 		novaFuncao.setResponsavel(funcao.getResponsavel());
 		novaFuncao.setRlr_alr(funcao.getRlr_alr());
 		novaFuncao.setTipoDeContagem(projeto.get().getTipoContagem());
+		novaFuncao.setDeflator(deflator);
 		novaFuncao.calcularComplexidade();
 		novaFuncao.calcularPontosDeFuncao();
 		projeto.get().adicionarFuncao(novaFuncao);
