@@ -1,18 +1,25 @@
 package br.com.allan.pontodefuncao.classes;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Entity
-public class Recurso implements UserDetails {
+public class Usuario implements UserDetails {
+	
 	/**
 	 *
 	 */
@@ -25,9 +32,12 @@ public class Recurso implements UserDetails {
 	private String nome;
 	private String funcao;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate dataInicio;
-	public Recurso() {}
-	public Recurso(String nome, String funcao) {
+	private Date dataInicio;
+	@ManyToMany(fetch=FetchType.EAGER)
+	private List<Perfil> perfis = new ArrayList<>();
+	
+	public Usuario() {}
+	public Usuario(String nome, String funcao) {
 		this.nome = nome;
 		this.funcao = funcao;
 	}
@@ -55,10 +65,10 @@ public class Recurso implements UserDetails {
 	public void setFuncao(String funcao) {
 		this.funcao = funcao;
 	}
-	public LocalDate getDataInicio() {
+	public Date getDataInicio() {
 		return dataInicio;
 	}
-	public void setDataInicio(LocalDate dataInicio) {
+	public void setDataInicio(Date dataInicio) {
 		this.dataInicio = dataInicio;
 	}
 	@Override
@@ -67,13 +77,22 @@ public class Recurso implements UserDetails {
 	}
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.perfis;
 	}
+	
 	@Override
 	public String getPassword() {
 		// TODO Auto-generated method stub
 		return this.password ;
+	}
+	public List<Perfil> getPerfis() {
+		return perfis;
+	}
+	public void setPerfis(List<Perfil> perfis) {
+		this.perfis = perfis;
+	}
+	public void setPassword(String password) {
+		this.password =new BCryptPasswordEncoder().encode(password);
 	}
 	@Override
 	public boolean isAccountNonExpired() {

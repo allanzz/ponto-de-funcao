@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="tag"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,6 +72,7 @@
 			</div>
 		</div>
 	</div>
+	<tag:menu></tag:menu>
 	<div class="container">
 
 		<div class="container-fluid">

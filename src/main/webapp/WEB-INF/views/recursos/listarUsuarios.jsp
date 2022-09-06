@@ -15,36 +15,32 @@
 	integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
 	crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-<title>Projetos</title>
+<title>Usuários-Listagem</title>
 </head>
 <body>
 <tag:menu></tag:menu>
 
 	<div class="container">
-	<h1>Listagem de projetos</h1>
+	<h1>Listagem de Usuarios</h1>
 	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th scope="col">ID</th>
-				<th scope="col">Descrição</th>
-				<th scope="col">Tipo de Projeto</th>
-				<th scope="col">Data de Inicio</th>
-				<th scope="col">Responsável</th>
-				<th scope="col">Tipo de Contagem</th>
+				<th scope="col">Nome</th>				
+				<th scope="col">Função</th>
+				<th scope="col">Data de Inicio</th>				
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="projeto" items="${projetos}">
+			<c:forEach var="usuario" items="${usuarios}">
 				<tr>
-					<fmt:formatDate value="${projeto.getDataInicio()}" type="both"
+					<fmt:formatDate value="${usuario.getDataInicio()}" type="both"
 						pattern="dd/MM/yyyy" var="dataFormatada" />
-					<td><c:out value="${projeto.getId()}" /></td>
-					<td><a href="/detalhe-projeto/${projeto.getId() }"><c:out value="${projeto.getDescricao()}" /></a></td>
-					<td><c:out value="${projeto.getTipoProjeto()}" /></td>
-					<td>${dataFormatada}</td>
-					<td><c:out value="${projeto.getResponsavel()}" /></td>
-					<td><c:out value="${projeto.getTipoContagem()}" /></td>
-					<td><a href="/excluir-projeto/${projeto.getId()}"><img src="/lixeira-de-reciclagem.png" /></a></td>				
+					<td><c:out value="${usuario.getId()}" /></td>
+					<td><a href="/detalhe-projeto/${projeto.getId() }"><c:out value="${usuario.getNome()}" /></a></td>
+					<td><a href="/detalhe-projeto/${projeto.getId() }"><c:out value="${usuario.getFuncao()}" /></a></td>
+					<td>${dataFormatada}</td>					
+					<td><a href="/remove-usuario/${usuario.getId()}"><img src="/lixeira-de-reciclagem.png" /></a></td>				
 				</tr>
 			</c:forEach>
 		</tbody>

@@ -58,10 +58,16 @@ public class ProjetoController {
 	}
 	
 	@GetMapping("/listar-projetos")
-	public ModelAndView listarRecursos() {
+	public ModelAndView listarProjetos() {
 		List<Projeto> projetos = projetoRep.findAll();
 		ModelAndView mv = new ModelAndView("/projetos/listarProjeto");
 		mv.addObject("projetos", projetos);
+		return mv;
+	}
+	@GetMapping("/excluir-projeto/{id}")
+	public ModelAndView excluirProjeto(@PathVariable int id) {
+		projetoRep.deleteById(id);
+		ModelAndView mv = new ModelAndView("redirect:/listar-projetos");
 		return mv;
 	}
 	
