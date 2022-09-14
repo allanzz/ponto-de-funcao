@@ -23,10 +23,15 @@ public class UsuarioController {
 	@PostMapping("/novo-usuario")
 	public ModelAndView salvar(Usuario usuario) {
 		System.out.println("Recurso:" + usuario);
-		Usuario usuarioSalvo = usuarioRepository.save(usuario);
 		ModelAndView mv = new ModelAndView("redirect:/cadastra-usuario");
-		mv.addObject("username", usuarioSalvo.getNome());
-		return mv;
+		try {
+			Usuario usuarioSalvo = usuarioRepository.save(usuario);			
+			mv.addObject("username", usuarioSalvo.getNome());
+			return mv;
+		} catch (Exception e) {
+			mv.addObject("erro", "Ocorreu um erro :"+e.getMessage());
+			return mv;
+		}		
 	}
 
 	// Exibe tela de cadastro de usuario
@@ -48,7 +53,7 @@ public class UsuarioController {
 	@GetMapping("/remove-usuario/{id}")
 	public String removeUsuario(@PathVariable int id) {
 		usuarioRepository.deleteById(id);
-		return "redirect:/listar-usuario";
+		return "redirect:/listar-usuarios";
 
 	}
 

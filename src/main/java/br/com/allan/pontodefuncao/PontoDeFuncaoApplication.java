@@ -18,5 +18,6 @@ public class PontoDeFuncaoApplication {
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 	    return new BCryptPasswordEncoder(); 
 	}
+	
 
 }

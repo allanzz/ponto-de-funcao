@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">CPF</a>
@@ -23,8 +24,24 @@
             <li><a class="dropdown-item" href="/cadastra-usuario">Cadastrar Usuário</a></li>
             <li><a class="dropdown-item" href="/listar-usuarios">Listar Usuários</a></li>            
           </ul>
-        </li>        
-      </ul>     
+        </li>
+         <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Listagem
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/listagemFuncoes">Listar Funções</a></li>            
+          </ul>
+        </li>           
+      </ul>
+      <div class="text-right">
+      <sec:authorize access="!isAuthenticated()">
+  			Login
+	  </sec:authorize>
+	<sec:authorize access="isAuthenticated()">
+            <a href="/logout">Sair</a>
+	</sec:authorize>
+      </div>     
     </div>
   </div>
 </nav>

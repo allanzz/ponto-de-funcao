@@ -3,6 +3,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
     <%@ taglib tagdir="/WEB-INF/tags" prefix="tag"%>
+    <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +35,6 @@
 <br />
 <label for="tipoProjeto" class="form-label">Tipo de projeto:</label>
 <select name="tipoProjeto" class="form-select">
-	<option value="aplicação">Aplicação</option>
 	<option value="Desenvolvimento">Desenvolvimento</option>
 	<option value="Melhoria">Melhoria</option>
 </select>

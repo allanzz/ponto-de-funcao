@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib tagdir="/WEB-INF/tags" prefix="tag"%>
+    <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +23,9 @@
 <h1>Cadastro de Usuário</h1>
 <c:if test="${param.username!=null }">
 	<c:out value="O usuário ${param.username} foi cadastrado com sucesso!" />
+</c:if>
+<c:if test="${param.erro!=null }">
+	<c:out value="${param.erro}" />
 </c:if>
 <form action="/novo-usuario" method="post">
 <input type="text" class="form-control" name="username" width=30 placeholder="Digite o username"><br />

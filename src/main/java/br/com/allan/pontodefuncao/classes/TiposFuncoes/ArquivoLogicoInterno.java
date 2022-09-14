@@ -23,17 +23,19 @@ public class ArquivoLogicoInterno extends Funcao {
 	@Override
 	public TipoComplexidade calcularComplexidade() {	
 		if(this.tipoDeContagem.equals("Detalhada")) {
-		TipoComplexidade tipocomplexidade=null;
-		tipocomplexidade = verificaFaixaRLR()==1&&verificarFaixaDer()==1?TipoComplexidade.SIMPLES:tipocomplexidade;
-		tipocomplexidade = verificaFaixaRLR()==1&&verificarFaixaDer()==2?TipoComplexidade.SIMPLES:tipocomplexidade;
-		tipocomplexidade = verificaFaixaRLR()==1&&verificarFaixaDer()==3?TipoComplexidade.MEDIA:tipocomplexidade;
-		tipocomplexidade = verificaFaixaRLR()==2&&verificarFaixaDer()==1?TipoComplexidade.SIMPLES:tipocomplexidade;
-		tipocomplexidade = verificaFaixaRLR()==2&&verificarFaixaDer()==2?TipoComplexidade.MEDIA:tipocomplexidade;
-		tipocomplexidade = verificaFaixaRLR()==2&&verificarFaixaDer()==3?TipoComplexidade.COMPLEXA:tipocomplexidade;
-		tipocomplexidade = verificaFaixaRLR()==3&&verificarFaixaDer()==1?TipoComplexidade.MEDIA:tipocomplexidade;
-		tipocomplexidade = verificaFaixaRLR()==3&&verificarFaixaDer()==2?TipoComplexidade.COMPLEXA:tipocomplexidade;
-		tipocomplexidade = verificaFaixaRLR()==3&&verificarFaixaDer()==3?TipoComplexidade.COMPLEXA:tipocomplexidade;
-		return tipocomplexidade;
+			int rlrLinha=verificaFaixaRLR();
+			int derColuna = verificarFaixaDer();
+			TipoComplexidade[][] tipoComplexidade = new TipoComplexidade[3][3];
+			tipoComplexidade[0][0] = TipoComplexidade.SIMPLES;
+			tipoComplexidade[0][1] = TipoComplexidade.SIMPLES;
+			tipoComplexidade[0][2] = TipoComplexidade.MEDIA;
+			tipoComplexidade[1][0] = TipoComplexidade.SIMPLES;
+			tipoComplexidade[1][1] = TipoComplexidade.MEDIA;
+			tipoComplexidade[1][2] = TipoComplexidade.COMPLEXA;
+			tipoComplexidade[2][0] = TipoComplexidade.MEDIA;
+			tipoComplexidade[2][2] = TipoComplexidade.COMPLEXA;
+			tipoComplexidade[2][2] = TipoComplexidade.COMPLEXA;			
+			return tipoComplexidade[rlrLinha][derColuna];		
 		}else {
 			return TipoComplexidade.SIMPLES;
 		}
@@ -48,24 +50,21 @@ public class ArquivoLogicoInterno extends Funcao {
 		return this.pontosDeFuncao;
 	}
 	
-	public int verificaFaixaRLR() {
-		if(this.getRlr()>=2&&this.getRlr()<=5) {
-			return 2;
-		}
-		if(this.getRlr()>=51) {
-			return 3;
-		}
-		return 1;
-	}
-	public int verificarFaixaDer() {
-		if(this.getDer()>=1&&this.getDer()<=19) {
+	public Integer verificaFaixaRLR() {
+		if(this.getRlr_alr()>=2&&this.getRlr_alr()<=5) {
 			return 1;
 		}
+		if(this.getRlr_alr()>=51) {
+			return 2;
+		}
+		return 0;
+	}
+	public int verificarFaixaDer() {
 		if(this.getDer()>=20&&this.getDer()<=50) {
-			return 2 ;
+			return 1 ;
 		}
 		if(this.getDer()>=51) {
-			return 3 ;
+			return 2 ;
 		}
 		return 0;
 	}

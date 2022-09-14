@@ -1,5 +1,9 @@
 package br.com.allan.pontodefuncao.classes.TiposFuncoes;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -13,8 +17,9 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import br.com.allan.pontodefuncao.classes.Deflator;
 import br.com.allan.pontodefuncao.classes.Projeto;
@@ -31,9 +36,9 @@ public class Funcao {
 	private int id;
 	private String descricao;
 	private String responsavel;
-	private Integer rlr_alr;
+	private Integer rlr_alr=1;
 	@Column(nullable = true)
-	private Integer der;
+	private Integer der=1;
 	private String tipoDeFuncao;
 	protected String tipoDeContagem;
 	@OneToOne
@@ -46,6 +51,9 @@ public class Funcao {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "projeto_id")
 	Projeto projeto;
+	private String status = "pendente";
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date dataConclusao;
 
 	public Funcao(Projeto projeto) {
 		super();
@@ -161,6 +169,14 @@ public class Funcao {
 		this.tipoDeFuncao = tipoDeFuncao;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public TipoComplexidade calcularComplexidade() {
 		return null;
 	}
@@ -171,5 +187,52 @@ public class Funcao {
 	public void calcularPontosDeFuncaoImpactado() {
 		pontoDeFuncaoImpactado = this.pontosDeFuncao * this.getDeflator().getValor();
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		/*
+		 * if (!this.getClass().isAssignableFrom(obj.getClass())) return false;
+		 */
+		Funcao other = (Funcao) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Funcao [id=" + id + ", descricao=" + descricao + ", responsavel=" + responsavel + ", rlr_alr=" + rlr_alr
+				+ ", der=" + der + ", tipoDeFuncao=" + tipoDeFuncao + ", tipoDeContagem=" + tipoDeContagem
+				+ ", deflator=" + deflator + ", tipo=" + tipo + ", pontosDeFuncao=" + pontosDeFuncao
+				+ ", pontoDeFuncaoImpactado=" + pontoDeFuncaoImpactado + ", projeto=" + projeto.getDescricao() + ", status=" + status
+				+ ", idDeflator=" + idDeflator + "]";
+	}
+
+	public Date getDataConclusao() {
+		return dataConclusao;
+	}
+
+	public void setDataConclusao(Date dataConclusao) {
+		this.dataConclusao = dataConclusao;
+	}
+	public String getDataConclusaoFormatada() {
+		DateFormat df = new SimpleDateFormat("yyyy-MM-d");
+		return df.format(this.dataConclusao);
+		
+	}
+	
+	
 
 }

@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="tag"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <html>
@@ -38,7 +39,7 @@
 						pattern="dd/MM/yyyy" var="dataFormatada" />
 					<td><c:out value="${usuario.getId()}" /></td>
 					<td><a href="/detalhe-projeto/${projeto.getId() }"><c:out value="${usuario.getNome()}" /></a></td>
-					<td><a href="/detalhe-projeto/${projeto.getId() }"><c:out value="${usuario.getFuncao()}" /></a></td>
+					<td><c:out value="${usuario.getFuncao()}" /></td>
 					<td>${dataFormatada}</td>					
 					<td><a href="/remove-usuario/${usuario.getId()}"><img src="/lixeira-de-reciclagem.png" /></a></td>				
 				</tr>
