@@ -2,7 +2,9 @@ package br.com.allan.pontodefuncao.controller;
 
 import java.lang.reflect.InvocationTargetException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -90,10 +92,25 @@ public class FuncaoController {
 			projeto.getFuncoes().get(indice).setRlr_alr(funcao.getRlr_alr());
 			projeto.getFuncoes().get(indice).setDer(funcao.getDer());
 			projeto.getFuncoes().get(indice).setDeflator(deflator);
-						
+			boolean ehAlteracao = !projeto.getFuncoes().get(indice).getStatus().equals(funcao.getStatus());
+			boolean ehConcluido = funcao.getStatus().equals("Concluido");						
 			projeto.getFuncoes().get(indice).setStatus(funcao.getStatus());
-			projeto.getFuncoes().get(indice).setDataConclusao(funcao.getDataConclusao());		
+			
+			System.out.println(ehAlteracao+" "+ehConcluido);
+			if(ehAlteracao&&ehConcluido) {
+			try {
+				Date agora = new SimpleDateFormat("yyyy-MM-dd").parse(LocalDate.now().toString());
+				projeto.getFuncoes().get(indice).setDataConclusao(agora);
+				System.out.println("Data alterada"+projeto.getFuncoes().get(indice).getDataConclusaoFormatada());
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}//fim do try...catch				
+			}//fim do IF da data
+			if(funcao.getStatus().equals("Pendente")) {
+				projeto.getFuncoes().get(indice).setDataConclusao(null);
 			}
+			}//fim do IF fo INDICE
 			projetoRep.save(projetoOpt.get());
 			String url = "/detalhe-projeto/" + projetoOpt.get().getId();
 			ModelAndView mv = new ModelAndView("redirect:" + url);

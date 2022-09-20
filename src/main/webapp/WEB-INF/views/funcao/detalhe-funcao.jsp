@@ -63,9 +63,13 @@
 						<option value="Pendente" <c:out value="${funcao.getStatus().equals('Pendente') ? 'selected' : null}" />>Pendente</option>
 						<option value="Concluido" <c:out value="${funcao.getStatus().equals('Concluido') ? 'selected' : null}" />>Concluido</option>
 					</select><br />	
-					<div class="form-group">
+				<c:if test="${funcao.getStatus().equals('Concluido')}">
+				<div class="form-group">
 				<label for="dataConclusao" class="form-label">Data Conclusão:</label>	
-				<input type="date" value="${funcao.getDataConclusaoFormatada()}" name="dataConclusao" placeholder="Data da Conclusão" class="form-control"></div><br />	
+				<input type="date" value="${funcao.getDataConclusaoFormatada()}" name="dataConclusao" placeholder="Data da Conclusão" class="form-control">
+				</div>
+				</c:if>
+				<br />	
 									
 				</div>
 				<br />

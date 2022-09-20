@@ -228,8 +228,12 @@ public class Funcao {
 		this.dataConclusao = dataConclusao;
 	}
 	public String getDataConclusaoFormatada() {
+		if(this.dataConclusao!=null) {
 		DateFormat df = new SimpleDateFormat("yyyy-MM-d");
 		return df.format(this.dataConclusao);
+		}else {
+			return null;
+		}
 		
 	}
 	
